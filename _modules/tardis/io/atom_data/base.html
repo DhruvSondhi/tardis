@@ -432,9 +432,7 @@
         <span class="n">levels</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">levels</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cgs</span>
 
         <span class="c1"># Create a new columns with wavelengths in the CGS units</span>
-        <span class="n">lines</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;wavelength_cm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-            <span class="n">lines</span><span class="p">[</span><span class="s2">&quot;wavelength&quot;</span><span class="p">],</span> <span class="s2">&quot;angstrom&quot;</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">cgs</span>
+        <span class="n">lines</span><span class="p">[</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="s2">&quot;wavelength&quot;</span><span class="p">],</span> <span class="s2">&quot;angstrom&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cgs</span>
 
         <span class="c1"># SET ATTRIBUTES</span>
 
