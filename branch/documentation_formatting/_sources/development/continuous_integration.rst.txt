@@ -15,7 +15,7 @@ Azure Repos
 -----------
 
 Azure Repos is just another service to store Git repositories.
-Currently, we use Azure Repos to mirror `tardis-refdata`
+Currently, we use Azure Repos to mirror ``tardis-refdata``
 repository since Azure does not impose limits on LFS bandwith
 nor storage.
 
