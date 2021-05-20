@@ -252,7 +252,7 @@ push up to your own repo on GitHub with::
    git push origin my-new-feature
 
 In git >= 1.7, you can ensure that the link is correctly set by using the
-`--set-upstream` option::
+``--set-upstream`` option::
 
    git push --set-upstream origin my-new-feature
 

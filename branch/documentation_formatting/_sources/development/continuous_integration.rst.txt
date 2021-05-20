@@ -181,13 +181,13 @@ to paths in Azure:
 
 * All folders for a given pipeline are created under ``Agent.BuildDirectory`` 
   variable, alias ``Pipeline.Workspace``. This includes subdirectories like
-  `/s` for sources or ``/a`` for artifacts.
+  ``/s`` for sources or ``/a`` for artifacts.
 
 * Path to source code varies depending on how many repositories we fetch.
   For example, source code is located under the ``Build.Repository.LocalPath``
   variable (alias ``Build.SourcesDirectory``) when fetching a single repository,
   but after fetching a second repository code is moved automatically to
-  `Build.Repository.LocalPath/repository-name`.
+  ``Build.Repository.LocalPath/repository-name``.
 
 See the Azure documentation to learn more about `checking out multiple repositories`_.
 
@@ -318,7 +318,7 @@ on a pull request:
 
   /AzurePipelines run compare-refdata
 
-For brevity, you can comment using `/azp` instead of ``/AzurePipelines``.
+For brevity, you can comment using ``/azp`` instead of ``/AzurePipelines``.
 
 By default, generates new reference data for the ``HEAD`` of the pull request. Then, 
 compares against latest reference data stored in ``tardis-refdata`` repository. If

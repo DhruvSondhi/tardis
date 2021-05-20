@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Continuous Integration &mdash; TARDIS v3.0.dev3956</title>
+  <title>Continuous Integration &mdash; TARDIS v3.0.dev3957</title>
   
 
   
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                3.0.dev3956
+                3.0.dev3957
               </div>
             
           
@@ -405,12 +405,12 @@ to paths in Azure:</p>
 <ul class="simple">
 <li><p>All folders for a given pipeline are created under <code class="docutils literal notranslate"><span class="pre">Agent.BuildDirectory</span></code>
 variable, alias <code class="docutils literal notranslate"><span class="pre">Pipeline.Workspace</span></code>. This includes subdirectories like
-<cite>/s</cite> for sources or <code class="docutils literal notranslate"><span class="pre">/a</span></code> for artifacts.</p></li>
+<code class="docutils literal notranslate"><span class="pre">/s</span></code> for sources or <code class="docutils literal notranslate"><span class="pre">/a</span></code> for artifacts.</p></li>
 <li><p>Path to source code varies depending on how many repositories we fetch.
 For example, source code is located under the <code class="docutils literal notranslate"><span class="pre">Build.Repository.LocalPath</span></code>
 variable (alias <code class="docutils literal notranslate"><span class="pre">Build.SourcesDirectory</span></code>) when fetching a single repository,
 but after fetching a second repository code is moved automatically to
-<cite>Build.Repository.LocalPath/repository-name</cite>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">Build.Repository.LocalPath/repository-name</span></code>.</p></li>
 </ul>
 <p>See the Azure documentation to learn more about <a class="reference external" href="https://github.com/microsoft/azure-pipelines-yaml/blob/master/design/multi-checkout.md#behavior-changes-in-multi-checkout-mode">checking out multiple repositories</a>.</p>
 </div>
@@ -519,7 +519,7 @@ on a pull request:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">AzurePipelines</span> <span class="n">run</span> <span class="n">compare</span><span class="o">-</span><span class="n">refdata</span>
 </pre></div>
 </div>
-<p>For brevity, you can comment using <cite>/azp</cite> instead of <code class="docutils literal notranslate"><span class="pre">/AzurePipelines</span></code>.</p>
+<p>For brevity, you can comment using <code class="docutils literal notranslate"><span class="pre">/azp</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/AzurePipelines</span></code>.</p>
 <p>By default, generates new reference data for the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> of the pull request. Then,
 compares against latest reference data stored in <code class="docutils literal notranslate"><span class="pre">tardis-refdata</span></code> repository. If
 you want to compare two different labels (SHAs, branches, tags, etc.) uncomment and
