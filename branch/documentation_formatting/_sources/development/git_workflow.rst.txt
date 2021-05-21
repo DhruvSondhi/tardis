@@ -246,7 +246,7 @@ or ``buxfix-for-issue-42``.
 Generally, you will want to keep your feature branches on your public GitHub_
 fork. To do this, you `git push`_ this new branch up to your
 GitHub repo. Generally (if you followed the instructions in these pages, and
-by default), git will have a link to your GitHub repo, called ``origin``. You
+by default), git will have a link to your GitHub repo, called `origin`. You
 push up to your own repo on GitHub with::
 
    git push origin my-new-feature
