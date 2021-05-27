@@ -65,7 +65,7 @@ We assume that you have added the necessary changes to TARDIS and have an open p
 
     .. code-block:: none
 
-        - if [[ $TEST_MODE == 'spectrum' ]]; then git fetch origin; fiapt list --upgradable
+        - if [[ $TEST_MODE == 'spectrum' ]]; then git fetch origin; fi
         - if [[ $TEST_MODE == 'spectrum' ]]; then git checkout origin/master; fi
 
 #. Ensure TARDIS pull request passes Travis-CI again and ping someone to merge your PR to the TARDIS master branch.

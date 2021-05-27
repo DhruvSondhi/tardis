@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Procedure to update the reference data &mdash; TARDIS v3.0.dev3970</title>
+  <title>Procedure to update the reference data &mdash; TARDIS v3.0.dev3971</title>
   
 
   
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                3.0.dev3970
+                3.0.dev3971
               </div>
             
           
@@ -313,7 +313,7 @@ git lfs pull
 <li><p>Ask for review for your PR on <code class="docutils literal notranslate"><span class="pre">tardis-refdata</span></code> and wait for merge.</p></li>
 <li><p>Then change the <code class="docutils literal notranslate"><span class="pre">.travis.yml</span></code> in <code class="docutils literal notranslate"><span class="pre">tardis</span></code> directory to:</p>
 <blockquote>
-<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- if [[ $TEST_MODE == &#39;spectrum&#39; ]]; then git fetch origin; fiapt list --upgradable
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- if [[ $TEST_MODE == &#39;spectrum&#39; ]]; then git fetch origin; fi
 - if [[ $TEST_MODE == &#39;spectrum&#39; ]]; then git checkout origin/master; fi
 </pre></div>
 </div>
