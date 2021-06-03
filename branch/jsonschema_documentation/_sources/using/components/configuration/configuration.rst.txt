@@ -189,10 +189,9 @@ just an integer. Finally, the method option selects the final spectral synthesis
 * integrated: use the :doc:`formal integral method <../../../physics/montecarlo/sourceintegration>` of Lucy 1999
 
 .. warning::
-
-  Currently, the "integrated" mode only works with the downbranching line
-  interaction mode. Note also the limitations listed at the bottom of the
-  dedicated page.
+    Currently, the "integrated" mode only works with the downbranching line
+    interaction mode. Note also the limitations listed at the bottom of the
+    dedicated page.
 
 
 .. include:: ../../example_data.inc
