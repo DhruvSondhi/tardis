@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>tardis.simulation.base module &mdash; TARDIS v3.0.dev3981</title>
+  <title>tardis.simulation.base module &mdash; TARDIS v3.0.dev3982</title>
   
 
   
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                3.0.dev3981
+                3.0.dev3982
               </div>
             
           
@@ -314,9 +314,9 @@ used in iterated i.</p>
 <dd><p>Bases: <a class="reference internal" href="#tardis.simulation.base.PlasmaStateStorerMixin" title="tardis.simulation.base.PlasmaStateStorerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.simulation.base.PlasmaStateStorerMixin</span></code></a>, <a class="reference internal" href="tardis.io.util.html#tardis.io.util.HDFWriterMixin" title="tardis.io.util.HDFWriterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">tardis.io.util.HDFWriterMixin</span></code></a></p>
 <p>A composite object containing all the required information for a
 simulation.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
+<dd class="field-odd"><dl>
 <dt><strong>converged</strong><span class="classifier">bool</span></dt><dd></dd>
 <dt><strong>iterations</strong><span class="classifier">int</span></dt><dd></dd>
 <dt><strong>model</strong><span class="classifier">tardis.model.Radial1DModel</span></dt><dd></dd>
@@ -329,8 +329,10 @@ simulation.</p>
 <dt><strong>luminosity_nu_end</strong><span class="classifier">astropy.units.Quantity</span></dt><dd></dd>
 <dt><strong>luminosity_requested</strong><span class="classifier">astropy.units.Quantity</span></dt><dd></dd>
 <dt><strong>nthreads</strong><span class="classifier">int</span></dt><dd><p>The number of threads to run montecarlo with</p>
-</dd>
-<dt><strong>.. note:: TARDIS must be built with OpenMP support in order for</strong></dt><dd><p><cite>nthreads</cite> to have effect.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TARDIS must be built with OpenMP support in order for <code class="docutils literal notranslate"><span class="pre">nthreads</span></code> to have effect.</p>
+</div>
 </dd>
 </dl>
 </dd>

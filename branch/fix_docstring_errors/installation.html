@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Installation &mdash; TARDIS v3.0.dev3981</title>
+  <title>Installation &mdash; TARDIS v3.0.dev3982</title>
   
 
   
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                3.0.dev3981
+                3.0.dev3982
               </div>
             
           
@@ -103,10 +103,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-tardis-with-anaconda">Installing TARDIS with Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-troubles-faq">Installation Troubles (FAQ)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#or">or</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-troubles-faq">Installation Troubles (FAQ)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart/quickstart.html">Quickstart for TARDIS</a></li>
@@ -325,11 +322,11 @@ This will often clean this problem. If it still persists:</p>
 <p><strong>Problem:</strong> when trying to set up CC=gcc python setup.py develop –with-openmp the following error popped up:
 from tardis/_compiler.c:1: /Users/yssavo/miniconda2/envs/tardis-show2/lib/gcc/x86_64-apple-darwin13.4.0/5.2.0/include-fixed/limits.h:168:61: fatal error: limits.h: No such file or directory</p>
 <p><strong>Solution:</strong> Run on terminal:</p>
-<blockquote>
-<div><p>open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">macOS_SDK_headers_for_macOS_10</span><span class="mf">.14</span><span class="o">.</span><span class="n">pkg</span>
+</pre></div>
+</div>
 <p><strong>Problem:</strong> Symbol not found: _GOMP_parallel when compiling with <cite>–with-openmp</cite></p>
-<p><strong>Solution:</strong> Install gcc8 from macports and then install with these flags: <cite>link_args = [‘-fopenmp’,’-Wl,-rpath,/opt/local/lib/gcc8/’]</cite></p>
+<p><strong>Solution:</strong> Install gcc8 from macports and then install with these flags: <code class="docutils literal notranslate"><span class="pre">link_args</span> <span class="pre">=</span> <span class="pre">['-fopenmp','-Wl,-rpath,/opt/local/lib/gcc8/']</span></code></p>
 <p><strong>Problem:</strong> While building TARDIS (via python 2.7) via <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span></code> build you
 may encounter the following error:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span><span class="p">:</span> <span class="nb">super</span><span class="p">()</span> <span class="n">argument</span> <span class="mi">1</span> <span class="n">must</span> <span class="n">be</span> <span class="nb">type</span><span class="p">,</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -343,13 +340,11 @@ The command for the same is :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span><span class="o">==</span><span class="mf">1.5.6</span>
 </pre></div>
 </div>
-<div class="section" id="or">
-<h3>or<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>conda install sphinx==1.5.6</p>
-</div></blockquote>
-<p>Then, <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build</span> <span class="pre">install</span></code> should run without problems.</p>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">sphinx</span><span class="o">==</span><span class="mf">1.5.6</span>
+</pre></div>
 </div>
+<p>Then, <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build</span> <span class="pre">install</span></code> should run without problems.</p>
 </div>
 </div>
 
