@@ -16,7 +16,6 @@ from tardis.montecarlo import montecarlo_configuration as mc_config_module
 from tardis.visualization.widgets.util import create_table_widget
 from IPython.display import display
 
-
 # Adding logging support
 logger = logging.getLogger(__name__)
 
