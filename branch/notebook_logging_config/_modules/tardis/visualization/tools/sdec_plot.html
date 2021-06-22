@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>tardis.visualization.tools.sdec_plot &mdash; TARDIS v3.0.dev4036</title>
+  <title>tardis.visualization.tools.sdec_plot &mdash; TARDIS v3.0.dev4038</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                3.0.dev4036
+                3.0.dev4038
               </div>
             
           
@@ -629,12 +629,20 @@
 <span class="sd">        -------</span>
 <span class="sd">        SDECPlotter</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="nb">dict</span><span class="p">(</span>
-                <span class="n">virtual</span><span class="o">=</span><span class="n">SDECData</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="s2">&quot;virtual&quot;</span><span class="p">),</span>
-                <span class="n">real</span><span class="o">=</span><span class="n">SDECData</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="s2">&quot;real&quot;</span><span class="p">),</span>
+        <span class="k">if</span> <span class="n">sim</span><span class="o">.</span><span class="n">runner</span><span class="o">.</span><span class="n">virt_logging</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+                <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">virtual</span><span class="o">=</span><span class="n">SDECData</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="s2">&quot;virtual&quot;</span><span class="p">),</span>
+                    <span class="n">real</span><span class="o">=</span><span class="n">SDECData</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="s2">&quot;real&quot;</span><span class="p">),</span>
+                <span class="p">)</span>
             <span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+                <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">virtual</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">real</span><span class="o">=</span><span class="n">SDECData</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="s2">&quot;real&quot;</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div>
 
 <div class="viewcode-block" id="SDECPlotter.from_hdf"><a class="viewcode-back" href="../../../../api/tardis.visualization.tools.sdec_plot.html#tardis.visualization.tools.sdec_plot.SDECPlotter.from_hdf">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_hdf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hdf_fpath</span><span class="p">):</span>
@@ -780,6 +788,15 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Invalid value passed to packets_mode. Only &quot;</span>
                 <span class="s2">&quot;allowed values are &#39;virtual&#39; or &#39;real&#39;&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">packets_mode</span> <span class="o">==</span> <span class="s2">&quot;virtual&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">packets_mode</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;SDECPlotter doesn&#39;t have any data for virtual packets population and SDEC &quot;</span>
+                <span class="s2">&quot;plot for the same was requested. Either set virtual_packet_logging: True &quot;</span>
+                <span class="s2">&quot;in your configuration file to generate SDEC plot with virtual packets, or &quot;</span>
+                <span class="s2">&quot;pass packets_mode=&#39;real&#39; in your function call to generate SDEC plot with &quot;</span>
+                <span class="s2">&quot;real packets.&quot;</span>
             <span class="p">)</span>
 
         <span class="c1"># Store the plottable range of each spectrum property which is</span>

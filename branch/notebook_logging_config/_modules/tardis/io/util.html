@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>tardis.io.util &mdash; TARDIS v3.0.dev4036</title>
+  <title>tardis.io.util &mdash; TARDIS v3.0.dev4038</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                3.0.dev4036
+                3.0.dev4038
               </div>
             
           
@@ -444,21 +444,27 @@
 <span class="sd">        HDFStore because the user decides on the mode in which they have</span>
 <span class="sd">        opened the HDFStore (&#39;r&#39;, &#39;w&#39; or &#39;a&#39;).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>  <span class="c1"># when path_or_buf is a str, the HDFStore should get created</span>
-            <span class="n">buf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">,</span> <span class="n">complevel</span><span class="o">=</span><span class="n">complevel</span><span class="p">,</span> <span class="n">complib</span><span class="o">=</span><span class="n">complib</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s2">&quot;Expected bytes, got HDFStore&quot;</span><span class="p">:</span>
-                <span class="c1"># when path_or_buf is an HDFStore buffer instead</span>
-                <span class="n">buf</span> <span class="o">=</span> <span class="n">path_or_buf</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">e</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># path_or_buf was a str</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
-                <span class="n">buf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span>
-                    <span class="s2">&quot;The specified HDF file already exists. If you still want &quot;</span>
-                    <span class="s2">&quot;to overwrite it, set option overwrite=True&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_or_buf</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span>
+                <span class="s2">&quot;The specified HDF file already exists. If you still want &quot;</span>
+                <span class="s2">&quot;to overwrite it, set function parameter overwrite=True&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>  <span class="c1"># when path_or_buf is a str, the HDFStore should get created</span>
+                <span class="n">buf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span>
+                    <span class="n">path_or_buf</span><span class="p">,</span> <span class="n">complevel</span><span class="o">=</span><span class="n">complevel</span><span class="p">,</span> <span class="n">complib</span><span class="o">=</span><span class="n">complib</span>
                 <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s2">&quot;Expected bytes, got HDFStore&quot;</span><span class="p">:</span>
+                    <span class="c1"># when path_or_buf is an HDFStore buffer instead</span>
+                    <span class="n">buf</span> <span class="o">=</span> <span class="n">path_or_buf</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">e</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">buf</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
             <span class="n">buf</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
