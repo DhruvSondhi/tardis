@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>tardis &mdash; TARDIS v3.0.dev4042</title>
+  <title>tardis &mdash; TARDIS v3.0.dev4043</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                3.0.dev4042
+                3.0.dev4043
               </div>
             
           
@@ -311,26 +311,28 @@
 <span class="sd">        Allows to set specific logging levels. Logs of the `log_state` level would be output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s2">&quot;debug&quot;</span> <span class="ow">in</span> <span class="n">tardis_config</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">specific</span> <span class="ow">or</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;specific_logging&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">specific</span> <span class="ow">or</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;specific&quot;</span><span class="p">]:</span>
             <span class="n">specific</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">specific</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;logging_level&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">log_state</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">log_state</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span>
                 <span class="n">log_state</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;CRITICAL&quot;</span>
-                <span class="ow">and</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;logging_level&quot;</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
             <span class="p">):</span>
-                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;logging_level&quot;</span><span class="p">]</span>
+                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
             <span class="k">elif</span> <span class="n">log_state</span><span class="p">:</span>
                 <span class="n">logging_level</span> <span class="o">=</span> <span class="n">log_state</span>
-                <span class="k">if</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;logging_level&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">log_state</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;log_state &amp; logging_level both specified&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">log_state</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;log_state is defined both in Functional Argument &amp; YAML Configuration {debug section}&quot;</span>
+                    <span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span>
                         <span class="sa">f</span><span class="s2">&quot;log_state = </span><span class="si">{</span><span class="n">log_state</span><span class="si">}</span><span class="s2"> will be used for Log Level Determination</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;logging_level&quot;</span><span class="p">]</span>
+                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">logging_level</span> <span class="o">=</span> <span class="n">log_state</span>
         <span class="n">specific</span> <span class="o">=</span> <span class="n">specific</span>
