@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>tardis &mdash; TARDIS v3.0.dev4043</title>
+  <title>tardis &mdash; TARDIS v3.0.dev4053</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                3.0.dev4043
+                3.0.dev4053
               </div>
             
           
@@ -253,6 +253,7 @@
     <span class="s2">&quot;ERROR&quot;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
     <span class="s2">&quot;CRITICAL&quot;</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">,</span>
 <span class="p">}</span>
+<span class="n">DEFAULT_LOG_STATE</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL&quot;</span>
 
 
 <div class="viewcode-block" id="FilterLog"><a class="viewcode-back" href="../api/tardis.html#tardis.FilterLog">[docs]</a><span class="k">class</span> <span class="nc">FilterLog</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -292,6 +293,7 @@
         <span class="k">return</span> <span class="n">log_record</span><span class="o">.</span><span class="n">levelno</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span></div></div>
 
 
+<span class="c1"># Setting up a list to store the Logging Filters set by logger.addFilter()</span>
 <span class="n">list_of_filter</span> <span class="o">=</span> <span class="p">[]</span>
 
 
@@ -310,47 +312,55 @@
 <span class="sd">    specific: boolean</span>
 <span class="sd">        Allows to set specific logging levels. Logs of the `log_state` level would be output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="s2">&quot;debug&quot;</span> <span class="ow">in</span> <span class="n">tardis_config</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">specific</span> <span class="ow">or</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;specific&quot;</span><span class="p">]:</span>
-            <span class="n">specific</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">specific</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">log_state</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">log_state</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;CRITICAL&quot;</span>
-                <span class="ow">and</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
-            <span class="p">):</span>
-                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="n">log_state</span><span class="p">:</span>
-                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">log_state</span>
-                <span class="k">if</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">log_state</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span>
-                        <span class="s2">&quot;log_state is defined both in Functional Argument &amp; YAML Configuration {debug section}&quot;</span>
-                    <span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;log_state = </span><span class="si">{</span><span class="n">log_state</span><span class="si">}</span><span class="s2"> will be used for Log Level Determination</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;debug&quot;</span> <span class="ow">in</span> <span class="n">tardis_config</span><span class="p">:</span>
+        <span class="n">specific</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;specific&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">specific</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">specific</span>
+        <span class="p">)</span>
+
+        <span class="n">logging_level</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">log_state</span> <span class="k">if</span> <span class="n">log_state</span> <span class="k">else</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Displays a message when both log_state &amp; tardis[&quot;debug&quot;][&quot;log_state&quot;] are specified</span>
+        <span class="k">if</span> <span class="n">log_state</span> <span class="ow">and</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;log_state is defined both in Functional Argument &amp; YAML Configuration {debug section}&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;log_state = </span><span class="si">{</span><span class="n">log_state</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> will be used for Log Level Determination</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging_level</span> <span class="o">=</span> <span class="n">log_state</span>
-        <span class="n">specific</span> <span class="o">=</span> <span class="n">specific</span>
+        <span class="k">if</span> <span class="n">log_state</span><span class="p">:</span>
+            <span class="n">logging_level</span> <span class="o">=</span> <span class="n">log_state</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;log_state&quot;</span><span class="p">:</span> <span class="n">DEFAULT_LOG_STATE</span><span class="p">}</span>
+            <span class="n">logging_level</span> <span class="o">=</span> <span class="n">tardis_config</span><span class="p">[</span><span class="s2">&quot;debug&quot;</span><span class="p">][</span><span class="s2">&quot;log_state&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">specific</span><span class="p">:</span>
+            <span class="n">specific</span> <span class="o">=</span> <span class="n">specific</span>
+
+    <span class="n">logging_level</span> <span class="o">=</span> <span class="n">logging_level</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">logging_level</span> <span class="ow">in</span> <span class="n">LOGGING_LEVELS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Passed Value for log_state = </span><span class="si">{</span><span class="n">logging_level</span><span class="si">}</span><span class="s2"> is Invalid. Must be one of the following </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">LOGGING_LEVELS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
 
     <span class="n">loggers</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">loggerDict</span>
     <span class="p">]</span>
-    <span class="k">if</span> <span class="n">logging_level</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">LOGGING_LEVELS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">logging_level</span> <span class="ow">in</span> <span class="n">LOGGING_LEVELS</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">logger</span> <span class="ow">in</span> <span class="n">loggers</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOGGING_LEVELS</span><span class="p">[</span><span class="n">logging_level</span><span class="o">.</span><span class="n">upper</span><span class="p">()])</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOGGING_LEVELS</span><span class="p">[</span><span class="n">logging_level</span><span class="p">])</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">list_of_filter</span> <span class="o">==</span> <span class="p">[]:</span>
+    <span class="k">if</span> <span class="n">list_of_filter</span><span class="p">:</span>
         <span class="k">for</span> <span class="nb">filter</span> <span class="ow">in</span> <span class="n">list_of_filter</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">logger</span> <span class="ow">in</span> <span class="n">loggers</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">removeFilter</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">specific</span><span class="p">:</span>
-        <span class="n">filter_log</span> <span class="o">=</span> <span class="n">FilterLog</span><span class="p">(</span><span class="n">LOGGING_LEVELS</span><span class="p">[</span><span class="n">logging_level</span><span class="o">.</span><span class="n">upper</span><span class="p">()])</span>
+        <span class="n">filter_log</span> <span class="o">=</span> <span class="n">FilterLog</span><span class="p">(</span><span class="n">LOGGING_LEVELS</span><span class="p">[</span><span class="n">logging_level</span><span class="p">])</span>
         <span class="n">list_of_filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filter_log</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">logger</span> <span class="ow">in</span> <span class="n">loggers</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">filter_log</span><span class="p">)</span>

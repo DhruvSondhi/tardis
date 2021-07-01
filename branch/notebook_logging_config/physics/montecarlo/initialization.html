@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Energy Packet Initialization &mdash; TARDIS v3.0.dev4043</title>
+  <title>Energy Packet Initialization &mdash; TARDIS v3.0.dev4053</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                3.0.dev4043
+                3.0.dev4053
               </div>
             
           
@@ -123,7 +123,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="propagation.html">Packet Propagation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lineinteraction.html">Line Interaction Treatments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="randomsampling.html">Random Sampling Basics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../est_and_conv/index.html">Estimators and Convergence</a></li>
@@ -502,10 +501,10 @@ div.rendered_html tbody tr:hover {
 <hr class="docutils" />
 <div class="section" id="Energy-Packet-Initialization">
 <span id="initialization"></span><h1>Energy Packet Initialization<a class="headerlink" href="#Energy-Packet-Initialization" title="Permalink to this headline">¶</a></h1>
-<p>While it is instructive to think about tracking the propagation history of photons when illustrating the basic idea behind Monte Carlo radiative transfer techniques, there are important numerical reasons for using a different discretization scheme. Instead of thinking in the photon picture, it brings significant advantages to follow the idea of <span id="id1">[<a class="reference internal" href="../../zreferences.html#id15" title="D. C. Abbott and L. B. Lucy. Multiline transfer and the dynamics of stellar winds. Astrophysical Journal, 288:679-693, January 1985. doi:10.1086/162834.">AbbottLucy85</a>]</span> and <span id="id2">[<a class="reference internal" href="../../zreferences.html#id24" title="L. B. Lucy. Computing radiative equilibria with Monte Carlo techniques. Astronomy and Astrophysics, 344:282-288, April 1999.">Lucy99a</a>]</span> and consider parcels of radiant energy as the fundamental building blocks of the Monte Carlo calculation. These
-basic Monte Carlo quanta are commonly referred to as “energy packets” or simply “packets”, and are composed of many photons with the same frequency.</p>
-<p>During a Monte Carlo calculation, <span class="math notranslate nohighlight">\(N\)</span> (a large number) packets, all with a certain energy <span class="math notranslate nohighlight">\(\varepsilon\)</span>, are created at the inner boundary of the computational domain (as will be discussed in <a class="reference internal" href="propagation.html"><span class="doc">Packet Propagation</span></a>) known as the photosphere. Currently, the photosphere is modeled as a spherical blackbody with a radius <span class="math notranslate nohighlight">\(R_\mathrm{phot}\)</span> and temperature <span class="math notranslate nohighlight">\(T_\mathrm{phot}\)</span>. In TARDIS, all packets are assigned identical energies, and the total energy of the
-packets is 1 erg (and thus each packet has an energy of <span class="math notranslate nohighlight">\(\frac{1}{N}\)</span> ergs).</p>
+<p>While it is instructive to think about tracking the propagation history of individual photons when illustrating the basic idea behind Monte Carlo radiative transfer techniques, there are important numerical reasons for using a different discretization scheme. Instead of thinking in the photon picture, it brings significant advantages to follow the idea of <span id="id1">[<a class="reference internal" href="../../zreferences.html#id15" title="D. C. Abbott and L. B. Lucy. Multiline transfer and the dynamics of stellar winds. Astrophysical Journal, 288:679-693, January 1985. doi:10.1086/162834.">AbbottLucy85</a>]</span> and <span id="id2">[<a class="reference internal" href="../../zreferences.html#id24" title="L. B. Lucy. Computing radiative equilibria with Monte Carlo techniques. Astronomy and Astrophysics, 344:282-288, April 1999.">Lucy99a</a>]</span> and consider parcels of radiant energy as the fundamental building blocks of the Monte Carlo
+calculation. These basic Monte Carlo quanta are commonly referred to as “energy packets” or simply “packets”, and are composed of many photons with the same frequency.</p>
+<p>During a Monte Carlo calculation, <span class="math notranslate nohighlight">\(N\)</span> (a large number) packets, all with a certain energy <span class="math notranslate nohighlight">\(\varepsilon\)</span>, are created at the inner boundary of the computational domain (which is discussed in <a class="reference internal" href="../setup/model.html"><span class="doc">Model of Supernova Domain</span></a>) known as the photosphere. Currently, the photosphere is modeled as a spherical blackbody with a radius <span class="math notranslate nohighlight">\(R_\mathrm{phot}\)</span> and temperature <span class="math notranslate nohighlight">\(T_\mathrm{phot}\)</span>. In TARDIS, all packets are assigned identical energies, and the total energy
+of the packets is 1 erg (and thus each packet has an energy of <span class="math notranslate nohighlight">\(\frac{1}{N}\)</span> ergs).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The indivisible energy packet scheme does not require that all packets have the same energy. This is just a convenient and simple choice adopted in TARDIS.</p>

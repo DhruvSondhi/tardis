@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Monte Carlo Configuration &mdash; TARDIS v3.0.dev4043</title>
+  <title>Monte Carlo Configuration &mdash; TARDIS v3.0.dev4053</title>
   
 
   
@@ -76,7 +76,7 @@
             
             
               <div class="version">
-                3.0.dev4043
+                3.0.dev4053
               </div>
             
           
@@ -493,7 +493,7 @@ of the Monte Carlo loop (which calculates the final spectrum!) when the radiatio
 <code class="docutils literal notranslate"><span class="pre">no_of_packets</span></code> to create a less noisy output spectrum. <code class="docutils literal notranslate"><span class="pre">no_of_virtual_packets</span></code> can also be set to greater than 0 (a useful number is 3) to
 use the Virtual Packet formalism. Increasing this number drastically increases computational costs (and memory requirements if they are logged).
 The <code class="docutils literal notranslate"><span class="pre">iterations</span></code> parameter describes the maximum number of Monte Carlo loops executed in a simulation before it ends. Convergence criteria can be used to make the simulation stop
-sooner when the convergence threshold has been reached (see <span class="xref std std-ref">convergence</span>).</p>
+sooner when the convergence threshold has been reached (see <a class="reference internal" href="../../../physics/est_and_conv/convergence.html#convergence"><span class="std std-ref">Convergence</span></a>).</p>
 <div class="section" id="convergence-strategy">
 <h2>Convergence Strategy<a class="headerlink" href="#convergence-strategy" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">convergence_criteria</span></code> section has a <code class="docutils literal notranslate"><span class="pre">type</span></code> keyword. Currently, one type is allowed: <code class="docutils literal notranslate"><span class="pre">damped</span></code>.

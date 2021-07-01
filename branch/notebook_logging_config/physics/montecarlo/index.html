@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Monte Carlo Iteration &mdash; TARDIS v3.0.dev4043</title>
+  <title>Monte Carlo Iteration &mdash; TARDIS v3.0.dev4053</title>
   
 
   
@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                3.0.dev4043
+                3.0.dev4053
               </div>
             
           
@@ -118,7 +118,6 @@
 <li class="toctree-l2"><a class="reference internal" href="initialization.html">Energy Packet Initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propagation.html">Packet Propagation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lineinteraction.html">Line Interaction Treatments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="randomsampling.html">Random Sampling Basics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../est_and_conv/index.html">Estimators and Convergence</a></li>
@@ -246,6 +245,11 @@
 </style>
 <div class="section" id="monte-carlo-iteration">
 <span id="montecarlo"></span><h1>Monte Carlo Iteration<a class="headerlink" href="#monte-carlo-iteration" title="Permalink to this headline">¶</a></h1>
+<p>After setting up the simulation, TARDIS runs the simulation using the <code class="docutils literal notranslate"><span class="pre">.run()</span></code> method. This runs several Monte
+Carlo iterations (which will be described in the links below), corresponding to the number of iterations specified
+in the <a class="reference internal" href="../../io/configuration/components/montecarlo.html#montecarlo-config"><span class="std std-ref">Monte Carlo Configuration</span></a>. As will be decribed in <a class="reference internal" href="../est_and_conv/index.html#est-and-conv"><span class="std std-ref">Estimators and Convergence</span></a> and
+<a class="reference internal" href="../spectrum/index.html#spectrum"><span class="std std-ref">Spectrum Generation</span></a>, most of these iterations will eventually be used to calculate the steady-state plasma properties,
+with the last iteration being used to determine the spectrum.</p>
 <p>The following pages provide a very basic introduction to Monte Carlo radiative
 transfer techniques as they are used in TARDIS. All the information listed here
 can also be found in various papers by L. Lucy and in the main TARDIS publication
@@ -254,22 +258,19 @@ can also be found in various papers by L. Lucy and in the main TARDIS publicatio
 <span id="id8">[<a class="reference internal" href="../../zreferences.html#id19" title="W. E. Kerzendorf and S. A. Sim. A spectral synthesis code for rapid modelling of supernovae. Monthly Notices of the RAS, 440:387-404, May 2014. arXiv:1401.5469, doi:10.1093/mnras/stu055.">KerzendorfSim14</a>]</span>).</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="basicprinciples.html">Monte Carlo Radiative Transfer - Basic Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicprinciples.html">Monte Carlo Radiative Transfer - Basic Principles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basicprinciples.html#random-sampling-basics">Random Sampling Basics</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="initialization.html">Energy Packet Initialization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="initialization.html#Custom-Packet-Source">Custom Packet Source</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="propagation.html">Packet Propagation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="propagation.html#model-of-supernova-domain">Model of Supernova Domain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propagation.html#propagation-in-a-spherical-domain">Propagation in a Spherical Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="propagation.html#supernova-expansion">Supernova Expansion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propagation.html#reference-frames">Reference Frames</a></li>
-<li class="toctree-l2"><a class="reference internal" href="propagation.html#numerical-and-physical-events">Numerical and Physical Events</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="propagation.html#distance-to-next-cell">Distance to Next Cell</a></li>
-<li class="toctree-l3"><a class="reference internal" href="propagation.html#physical-interactions">Physical Interactions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="propagation.html#distance-to-next-event">Distance to Next Event</a></li>
-<li class="toctree-l3"><a class="reference internal" href="propagation.html#performing-an-interaction">Performing an Interaction</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="propagation.html#numerical-and-physical-events">Numerical and Physical Events</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propagation.html#implementation-main-propagation-loop">Implementation: Main Propagation Loop</a></li>
 </ul>
 </li>
@@ -278,15 +279,6 @@ can also be found in various papers by L. Lucy and in the main TARDIS publicatio
 <li class="toctree-l2"><a class="reference internal" href="lineinteraction.html#downbranching">Downbranching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lineinteraction.html#macro-atom-scheme">Macro Atom Scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lineinteraction.html#comparison">Comparison</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="randomsampling.html">Random Sampling Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="randomsampling.html#inverse-transformation-method">Inverse transformation method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="randomsampling.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="randomsampling.html#isotropic-scattering">Isotropic Scattering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="randomsampling.html#next-interaction-location">Next Interaction Location</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
