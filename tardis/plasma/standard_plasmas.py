@@ -39,6 +39,7 @@ from tardis.plasma.properties import (
     StimulatedEmissionFactor,
     HeliumNumericalNLTE,
     IonNumberDensity,
+    IonNumberDensityHeNLTE,
     MarkovChainTransProbsCollector,
 )
 
@@ -77,6 +78,7 @@ def assemble_plasma(config, model, atom_data=None):
         continuum_interaction_species, names=["atomic_number", "ion_number"]
     )
 
+    logger.debug("Setting up Atom Data for the Simulation")
     if atom_data is None:
         if "atom_data" in config:
             if os.path.isabs(config.atom_data):
@@ -88,7 +90,7 @@ def assemble_plasma(config, model, atom_data=None):
         else:
             raise ValueError("No atom_data option found in the configuration.")
 
-        logger.info(f"\n\tReading Atomic Data from {atom_data_fname}")
+        logger.info(f"Reading Atomic Data from {atom_data_fname}")
 
         try:
             atom_data = AtomData.from_hdf(atom_data_fname)
@@ -101,12 +103,18 @@ def assemble_plasma(config, model, atom_data=None):
             )
             raise
 
+    logger.debug(
+        "Generating the Atom Data with the Model, Plasma & NLTE Species Configuration"
+    )
     atom_data.prepare_atom_data(
         model.abundance.index,
         line_interaction_type=config.plasma.line_interaction_type,
         nlte_species=nlte_species,
     )
 
+    logger.debug(
+        "Checking & Setting up Continuum Interaction Species from given Atom"
+    )
     # Check if continuum interaction species are in selected_atoms
     continuum_atoms = continuum_interaction_species.get_level_values(
         "atomic_number"
@@ -247,6 +255,7 @@ def assemble_plasma(config, model, atom_data=None):
 
     kwargs["helium_treatment"] = config.plasma.helium_treatment
 
+    logger.debug("Setting up the Plasma via BasePlasma Class")
     plasma = BasePlasma(
         plasma_properties=plasma_modules,
         property_kwargs=property_kwargs,

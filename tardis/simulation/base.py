@@ -322,7 +322,7 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
 
     def iterate(self, no_of_packets, no_of_virtual_packets=0, last_run=False):
         logger.info(
-            f"\n\tStarting iteration {(self.iterations_executed + 1):d} of {self.iterations:d}"
+            f"Starting iteration {(self.iterations_executed + 1):d} of {self.iterations:d}"
         )
         self.runner.run(
             self.model,
@@ -381,8 +381,8 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
         self.reshape_plasma_state_store(self.iterations_executed)
 
         logger.info(
-            f"\n\tSimulation finished in {self.iterations_executed:d} iterations "
-            f"\n\tSimulation took {(time.time() - start_time):.2f} s\n"
+            f"Simulation finished in {self.iterations_executed:d} iterations "
+            f"Simulation took {(time.time() - start_time):.2f} s\n"
         )
         self._call_back()
 
@@ -427,7 +427,7 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
         plasma_state_log.columns.name = "Shell No."
 
         if is_notebook():
-            logger.info("\n\tPlasma stratification:")
+            logger.info("Plasma stratification:")
 
             # Displaying the DataFrame only when the logging level is NOTSET, DEBUG or INFO
             if logger.level <= logging.INFO:
@@ -451,16 +451,16 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
             )
             for value in plasma_output.split("\n"):
                 output_df = output_df + "\t{}\n".format(value)
-            logger.info("\n\tPlasma stratification:")
+            logger.info("Plasma stratification:")
             logger.info(f"\n{output_df}")
 
         logger.info(
-            f"\n\tCurrent t_inner = {t_inner:.3f}\n\tExpected t_inner for next iteration = {next_t_inner:.3f}\n"
+            f"Current t_inner = {t_inner:.3f}\n\tExpected t_inner for next iteration = {next_t_inner:.3f}\n"
         )
 
     def log_run_results(self, emitted_luminosity, absorbed_luminosity):
         logger.info(
-            f"\n\tLuminosity emitted   = {emitted_luminosity:.3e}\n"
+            f"Luminosity emitted   = {emitted_luminosity:.3e}\n"
             f"\tLuminosity absorbed  = {absorbed_luminosity:.3e}\n"
             f"\tLuminosity requested = {self.luminosity_requested:.3e}\n"
         )
@@ -539,25 +539,47 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
         # Allow overriding some config structures. This is useful in some
         # unit tests, and could be extended in all the from_config classmethods.
         if "model" in kwargs:
+            logger.debug(
+                'Model found in Kwargs, Setting up the Model from Kwargs["model"]'
+            )
             model = kwargs["model"]
         else:
             if hasattr(config, "csvy_model"):
+                logger.debug(
+                    "Setting up the Radial1Model with CSVY Configuration"
+                )
                 model = Radial1DModel.from_csvy(config)
             else:
+                logger.debug(
+                    "Setting up the Radial1DModel with Model Configuration"
+                )
                 model = Radial1DModel.from_config(config)
         if "plasma" in kwargs:
+            logger.debug(
+                'Plasma found in Kwargs, Setting up the Nature Plasma from Kwargs["plasma"]'
+            )
             plasma = kwargs["plasma"]
         else:
+            logger.debug(
+                "Setting up the Plasma Properties from Plasma Configuration & Radial1DModel Config"
+            )
+            logger.debug(f"Plasma Config : {list(config.plasma.items())} ")
             plasma = assemble_plasma(
                 config, model, atom_data=kwargs.get("atom_data", None)
             )
         if "runner" in kwargs:
+            logger.debug(
+                'Runner found in Kwargs, Setting up the Runner from Kwargs["runner"]'
+            )
             if packet_source is not None:
                 raise ConfigurationError(
                     "Cannot specify packet_source and runner at the same time."
                 )
             runner = kwargs["runner"]
         else:
+            logger.debug(
+                "Setting up the MontecarloRunner with Runner Configuration"
+            )
             runner = MontecarloRunner.from_config(
                 config,
                 packet_source=packet_source,
