@@ -8,7 +8,7 @@ from collections import OrderedDict
 from tardis.montecarlo import MontecarloRunner
 from tardis.model import Radial1DModel
 from tardis.plasma.standard_plasmas import assemble_plasma
-from tardis.io.util import HDFWriterMixin
+from tardis.io.util import HDFWriterMixin, config_iteratation
 from tardis.io.config_reader import ConfigurationError
 from tardis.util.base import is_notebook
 from tardis.montecarlo import montecarlo_configuration as mc_config_module
@@ -563,7 +563,6 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
             logger.debug(
                 "Setting up the Plasma Properties from Plasma Configuration & Radial1DModel Config"
             )
-            logger.debug(f"Plasma Config : {list(config.plasma.items())} ")
             plasma = assemble_plasma(
                 config, model, atom_data=kwargs.get("atom_data", None)
             )
